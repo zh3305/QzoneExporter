@@ -317,6 +317,9 @@ class QzoneExporter(object):
             r = self._account_info.get_url(msglist_url, params=payload)
 
             json_data = get_json_data_from_response(r.text)
+            if json_data["code"]!=0:
+                logging.error("数据获取错误!:"+json_data["message"])
+                return
             if "msglist" in json_data:
                 if not json_data["msglist"]:
                     print("msglist is null, break")
@@ -895,12 +898,15 @@ def main():
         "--download", help="下载图片或视频至本地，需要先导出说说或相册的json数据", action="store_true")
 
     parser.add_argument("--all", help="导出所有数据", action="store_true")
+    parser.add_argument("-target_uin", help="导出所有数据" )
+    parser.add_argument("-self_uin", help="导出所有数据" )
+    parser.add_argument("-cookies_value", help="导出所有数据" )
 
     args = parser.parse_args()
 
-    target_uin = ""
-    self_uin = ""
-    cookies_value = ""
+    target_uin = args.target_uin
+    self_uin = args.self_uin
+    cookies_value = args.cookies_value
     g_tk = ""  # 可选，为空则通过 cookies 中的 p_skey 计算
 
     p_skey_string = "p_skey="

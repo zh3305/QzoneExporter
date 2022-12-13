@@ -108,3 +108,4 @@ log.txt
 html/static/avatars/*.*
 [0-9][0-9]*/
 .idea/
+.fleet/
