@@ -105,7 +105,7 @@ class ShuoShuoParser(Saver):
         msg["conlist"] = r_json["conlist"]
 
     @logging_wrap
-    def export(self, need_download_media=False):
+    def export(self, need_download_media=True):
         '''默认下载非登录id发表的资源
         '''
 

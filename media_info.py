@@ -3,6 +3,8 @@ import os
 
 from config import MEDIA_TYPE, QzoneFileName, QzoneKey, QzonePath, QzoneType
 from tools import logging_wrap
+import uuid
+import hashlib
 
 
 class MediaInfo(object):
@@ -111,7 +113,9 @@ def extract_media_info(json_data):
                 for url_key in QzoneKey.CONTENT_URL:
                     if media.get(url_key) and len(media[url_key]) > 0:
                         media_url = media[url_key]
-                        media_id = media.get(media_id_key, media_url)
+                        media_id=hashlib.sha256(media[url_key].encode()).hexdigest()
+                        # media[url_key]=media_id #设置值无效
+                        # media_id = media.get(media_id_key, media_url)
                         break
                 if media_backup:
                     for url_key in QzoneKey.CONTENT_URL:

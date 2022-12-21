@@ -894,8 +894,7 @@ def main():
     parser.add_argument("--msgboard", help="导出留言板数据", action="store_true")
     parser.add_argument("--photo", help="导出相册数据", action="store_true")
     parser.add_argument("--shuoshuo", help="导出说说数据", action="store_true")
-    parser.add_argument(
-        "--download", help="下载图片或视频至本地，需要先导出说说或相册的json数据", action="store_true")
+    parser.add_argument("--download", help="下载图片或视频至本地，需要先导出说说或相册的json数据", action="store_true")
 
     parser.add_argument("--all", help="导出所有数据", action="store_true")
     parser.add_argument("-target_uin", help="导出所有数据" )
