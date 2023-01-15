@@ -77,7 +77,7 @@ def download_media(url, directory, filename, has_extension=False, *args, **kwarg
                         f.write(data)
                         current_len += len(data)
                         percent = 100 * current_len / total_len
-                        print(s % (percent), end="")
+                        # print(s % (percent), end="")
                 result = True
                 print("\n%s is downloaded" % url)
     return result
