@@ -326,8 +326,11 @@ class QzoneExporter(object):
                     break
                 current_num = len(json_data["msglist"])
                 total_num += current_num
-            ss_parser = ShuoShuoParser(
-                self._account_info, json_data, pos, pos + current_num, self._directory)
+            #过滤大于 self._args.startDate 小于 self._args.endDate 
+            if current_num>0 and self._args.startDate and self._args.endDate:
+                if json_data["msglist"][0]["created_time"]<=int(self._args.startDate) or json_data["msglist"][current_num-1]["created_time"]>=int(self._args.endDate):
+                    continue
+            ss_parser = ShuoShuoParser(self._account_info, json_data, pos, pos + current_num, self._directory)
             ss_parser.export()
 
         if total_num != self._account_info.shuoshuo_num:
@@ -900,6 +903,8 @@ def main():
     parser.add_argument("-target_uin", help="导出所有数据" )
     parser.add_argument("-self_uin", help="导出所有数据" )
     parser.add_argument("-cookies_value", help="导出所有数据" )
+    parser.add_argument("-startDate", help="开始时间" )
+    parser.add_argument("-endDate", help="结束时间" )
 
     args = parser.parse_args()
 

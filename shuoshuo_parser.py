@@ -17,6 +17,9 @@ class ShuoShuoParser(Saver):
         Saver.__init__(self, json_data, directory, QzonePath.SHUOSHUO)
 
         self._account_info = account_info
+        self.totalCount = account_info.shuoshuo_num
+        # 打印log Setp
+        self.logSteps = int(math.ceil(account_info.shuoshuo_num*0.05))
 
         self._filename = "shuoshuo_%05d-%05d.json" % (begin, end - 1)
 
@@ -117,8 +120,11 @@ class ShuoShuoParser(Saver):
                 msglist_len = len(msglist)
                 for i in range(msglist_len):
                     msg = msglist[i]
-                    print("%05d\t" % ShuoShuoParser._shuoshuo_count,
-                          "process shuoshuo, tid:", msg["tid"])
+
+                    if (ShuoShuoParser._shuoshuo_count % self.logSteps) == 0:
+                        print("%05.2f%%   " % (ShuoShuoParser._shuoshuo_count/self.totalCount*100), "%05d\t" % ShuoShuoParser._shuoshuo_count,
+                              "说说获取进度, tid:", msg["tid"])
+
                     f.write("%s\n" % msg["tid"])
                     need_sleep = False
 

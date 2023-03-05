@@ -14,7 +14,7 @@ escape_chars_map = {' ': '%20', '/': '%2F', '\\': '%5C',
 
 def random_sleep(a=3, b=5):
     sleep_time = random.uniform(a, b)
-    print("sleep %.2fs" % sleep_time)
+    print("随机请求延时 %.2fs" % sleep_time)
     time.sleep(sleep_time)
 
 

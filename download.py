@@ -79,7 +79,7 @@ def download_media(url, directory, filename, has_extension=False, *args, **kwarg
                         percent = 100 * current_len / total_len
                         # print(s % (percent), end="")
                 result = True
-                print("\n%s is downloaded" % url)
+                # print("\n%s is downloaded" % url)
     return result
 
 
@@ -114,7 +114,7 @@ class Downloader(object):
             logging.warning("%s not exists" % self._input_file)
             return
 
-        print("start downloading")
+        print("开始下载资源数据.....")
         downloaded_urls = ""
         if os.path.exists(self._output_file):
             with open(self._output_file, "r", encoding="utf-8") as fin:
