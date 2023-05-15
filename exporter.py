@@ -4,6 +4,7 @@ import logging
 import math
 import os
 from threading import Lock
+import time
 
 from account_info import AccountInfo
 from blog_parser import BlogComment, BlogInfo, BlogParser, BlogsInfo
@@ -15,6 +16,9 @@ from photo_parser import (AlbumInfo, AlbumListInfo, PhotoComment,
 from shuoshuo_parser import ShuoShuoMediaDownloader, ShuoShuoParser
 from tools import (get_album_list_data, get_json_data_from_response,
                    logging_wrap, random_sleep, test_uin_valid)
+
+import sys
+sys.stdout.reconfigure(line_buffering=True) #每行输出都被立即刷新到标准输出，而不是被缓冲起来
 
 
 class QzoneExporter(object):
@@ -892,6 +896,9 @@ class QzoneExporter(object):
 def main():
 
     parser = argparse.ArgumentParser()
+    # print("开始抓取说说数据.... ")
+    # # 等待3秒
+    # time.sleep(3)
 
     parser.add_argument("--blog", help="导出日志数据", action="store_true")
     parser.add_argument("--msgboard", help="导出留言板数据", action="store_true")
